@@ -1,4 +1,7 @@
 Vagrant.configure("2") do |config|
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  # example box: ubuntu/jammy64 (change different box as required)
   config.vm.box = "ubuntu/jammy64"
 
   # Create a forwarded port mapping which allows access to a specific port
@@ -16,8 +19,28 @@ Vagrant.configure("2") do |config|
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
 
+  # Set host name for the machine
+  # config.vm.hostname = "addr-validator"
+
+  # Bootstrap the machine using inline shell script
   config.vm.provision "shell", inline: <<-SHELL
      apt-get update
      apt-get install -y dotnet-sdk-7.0
    SHELL
+
+  # Bootstrap the machine using external shell script (update path if required)
+  # example path: scripts/bootstrap.sh
+  # config.vm.provision "shell", path: "scripts/bootstrap.sh"
+
+  # Pass argument to bootstrapping shell script
+  # # Set script path as variable
+  # script_path = './scripts'
+  #
+  # config.vm.provision "shell" do |s|
+  #   s.path = "#{script_path}/bootstrap.sh"
+  #   # or hardcode the script path
+  #   # s.path = "scripts/bootstrap.sh"
+  #
+  #   # Set dotnet sdk version as v8.0
+  #   s.args = ["8.0"]
 end
